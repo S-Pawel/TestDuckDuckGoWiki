@@ -30,7 +30,6 @@ public class ExelReader {
         for(int i=0; i<=rowCount; i++){
             Row row = sheet.getRow(i);
             String cellValue = row.getCell(0).getStringCellValue();
-           // System.out.println(row.getCell(0).getStringCellValue());
             data[i] = cellValue;
 
         }

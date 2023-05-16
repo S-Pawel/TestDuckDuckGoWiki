@@ -7,6 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class TestCase {
     public static void testCaseWithDataBase(String[] TestCaseTable) {
+        String[] testResults = new String[TestCaseTable.length];
 
         for(int i = 0; i < TestCaseTable.length; i++) {
             WebDriver driver = new FirefoxDriver();
@@ -25,16 +26,22 @@ public class TestCase {
                 boolean comparisonVariable = derivativeVariable.equals(basicVariable[i]);
 
                 if (comparisonVariable) {
-                    System.out.println("Odnaleziona nazwa zgadza się bazową");
+                    testResults[i] = "Odnaleziona nazwa zgadza się bazową";
+                    System.out.println(testResults[i]);
                 } else {
-                    System.out.println("Bazowa nazwa różni się od nazwy odnalezionej");
+                    testResults[i] = "Bazowa nazwa różni się od nazwy odnalezionej";
+                    System.out.println(testResults[i]);
                 }
             }catch (NoSuchElementException e) {
-                System.out.println("Nie znaleziono elementu o klasie mw-page-title-main");
+                testResults[i] = "Nie znaleziono elementu o klasie mw-page-title-main";
+                System.out.println(testResults[i]);
             }
             driver.close();
+        }
 
-        }}
+
+        SaveToExel.saveToXlsx(TestCaseTable, testResults, "wyniki.xlsx");
+    }
 
 }
 
